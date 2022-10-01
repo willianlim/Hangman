@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Hangman {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("/home/user/myprojects/Hangman/world_alpha.txt"));
+        Scanner keyboard = new Scanner(System.in);
 
         List<String> words = new ArrayList<>();
         while (scanner.hasNext()) {
@@ -22,6 +23,16 @@ public class Hangman {
 
         List<Character> playerGuesses = new ArrayList<>();
 
+        printWordState(word, playerGuesses);
+
+        System.out.println("Please enter the letter: ");
+        String letterGuess = keyboard.nextLine();
+        playerGuesses.add(letterGuess.charAt(0));
+
+        printWordState(word, playerGuesses);
+    }
+
+    public static void printWordState(String word, List<Character> playerGuesses) {
         for (int i = 0; i < word.length(); i++) {
             if (playerGuesses.contains(word.charAt(i))) {
                 System.out.print(word.charAt(i));
